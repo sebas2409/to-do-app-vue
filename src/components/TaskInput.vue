@@ -2,8 +2,8 @@
   <div class="cardBox">
     <div class="container tasker">
       <strong>My task is: {{ task }}</strong>
-      <input type="text" v-model="task" class="taskInput">
-      <button>Add Task</button>
+      <input type="text" :value="task" @input="task=$event.target.value" class="taskInput">
+      <button v-on:click="addTask">Add Task</button>
     </div>
   </div>
 </template>
@@ -14,6 +14,12 @@ export default {
   data: () => ({
     task: '',
   }),
+  methods: {
+    addTask() {
+      this.$emit('add-task', this.task);
+      this.task = '';
+    },
+  }
 };
 </script>
 
